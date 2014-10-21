@@ -1,0 +1,14 @@
+{
+  "name": "assumejs",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp ci"
+  },
+  "author": "Nicolai Kamenzky (https://github.com/analog-nico)",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "1.9.2"
+  }
+}
