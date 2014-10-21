@@ -1,5 +1,6 @@
 'use strict';
 
+require.cache = {};
 var chai = require('chai');
 
 
@@ -32,4 +33,4 @@ assume.chaiUse(function (chai, util) {
 
 });
 
-modules.exports = assume;
+module.exports = assume;
