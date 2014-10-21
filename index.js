@@ -1,7 +1,27 @@
 'use strict';
 
-require.cache = {};
-var chai = require('chai');
+// Load chai freshly - so that tests which require chai get their independent instance!
+var chai = (function () {
+
+    var _ = require('lodash');
+
+    function clearCache() {
+        _(require.cache).keys().forEach(function (key) {
+            delete require.cache[key];
+        });
+    }
+
+    var temp = _.assign({}, require.cache);
+    clearCache();
+
+    var freshChai = require('chai');
+
+    clearCache();
+    _.assign(require.cache, temp);
+
+    return freshChai;
+
+})();
 
 
 // Assume.js is first and foremost a rebranding of chai.expect
