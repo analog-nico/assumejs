@@ -1,7 +1,7 @@
 {
   "name": "assumejs",
   "version": "0.0.0",
-  "description": "Assume your production system won't fail. And get proofed wrong by notifications.",
+  "description": "Assume your node.js production server won't fail. And get proofed wrong by notifications.",
   "main": "./lib/assume.js",
   "scripts": {
     "test": "./node_modules/.bin/gulp ci"
