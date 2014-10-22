@@ -12,18 +12,10 @@ var timesAssertionCatched = 0;
 assume.chaiUse(function (chai, util) {
 
     chai.Assertion.overwriteMethod('assert', function (originalAssert) {
-
         return function () {
-
-            try {
-                return originalAssert.apply(this, arguments);
-            } catch (err) {
-                timesAssertOfAssumeCalled += 1;
-                throw err;
-            }
-
+            timesAssertOfAssumeCalled += 1;
+            return originalAssert.apply(this, arguments);
         };
-
     });
 
 });
@@ -31,18 +23,10 @@ assume.chaiUse(function (chai, util) {
 chai.use(function (chai, util) {
 
     chai.Assertion.overwriteMethod('assert', function (originalAssert) {
-
         return function () {
-
-            try {
-                return originalAssert.apply(this, arguments);
-            } catch (err) {
-                timesAssertOfChaiCalled += 1;
-                throw err;
-            }
-
+            timesAssertOfChaiCalled += 1;
+            return originalAssert.apply(this, arguments);
         };
-
     });
 
 });
