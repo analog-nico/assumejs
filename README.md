@@ -121,15 +121,15 @@ var assume = require('assumejs');
 assume.overwriteHandleViolation(function (_super) {
 
   // The function returned will be called once an assumption gets violated.
-  // err - The error that Chai throws.
-  // context - The object that is optionally passed to assume()
+  // err - The error that Chai throws
+  // context - The object/array that is optionally passed to assume()
   return function (err, context) {
 
     // You may or may not call the previously registered handler.
 	// This allows stacking multiple handlers on top of each other if you wish to do so.
     _super(err, context);
 
-	// Do whatever you would like.
+	// Do whatever you like.
 	// E.g. calling on of the services listed in the next section.
 
   };
@@ -137,7 +137,7 @@ assume.overwriteHandleViolation(function (_super) {
 });
 ```
 
-The error that Chai throws is caught by assume.js and passed to the handler. It actually is a standardized `AssertionError`. For details see the ['assertion-error' module](https://www.npmjs.org/package/assertion-error)
+The error that Chai throws is caught by assume.js and passed to the handler. It actually is a standardized `AssertionError`. For details see the ['assertion-error' module](https://www.npmjs.org/package/assertion-error).
 
 ## How do I get notified like a boss?
 
@@ -158,7 +158,7 @@ The first time a certain assumption is violated you want to get notified immedia
 
 Assume.js is just one safety net of many you shall apply. Writing assumptions does not let you off the hook implementing proper error handling. I highly recommend Joyent's article about [error handling in node.js](https://www.joyent.com/developers/node/design/errors). Speaking in their terms you can only write assumptions for "operational errors". For those of which you understand well you can and should write code to recover from them. Those of which you don't understand well you should write assumptions that help you get a better understanding through their notifications - but in the meantime it is probably the best to intentionally crash your server as you would do for "programmer errors".
 
-When intentionally crashing your system because of an error you can't handle you probably will want to get notified like for violated assumptions. Therefore add the following code to your main file:
+When intentionally crashing your system because of an error you can't handle, you probably will want to get notified like for violated assumptions. Therefore add the following code to your main file:
 
 ``` js
 var assume = require('assumejs');
