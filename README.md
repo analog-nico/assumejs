@@ -6,11 +6,11 @@
 
 ## What does it do?
 
-**tl;dr:** Waeve assumptions - like asserts in unit tests - into your production code and get notified once they are violated. And no, it is no excuse for lazy testers.
+**tl;dr:** Weave assumptions - like asserts in unit tests - into your production code and get notified once they are violated. And no, it is no excuse for lazy testers.
 
 Frankly, some functionality cannot be sufficiently tested before moving to production: Will we always meet our service level agreements? Our load tests certainly won't cover all real-world scenarios! What if a third party API changes suddenly? We couldn't possibly predict the exact change and write a test for it! This means, we will have production failures and there is nothing we can do to prevent those.
 
-Assume.js provides a solution to close the gap betweeen "We tested this." and "We just cannot test that." The idea is to weave assumptions - like asserts in unit tests - into the production code. If an assumption is violated the developers in charge will e.g. receive an e-mail so they can do something about it, hopefully even before the user notices the error or gets annoyed.
+Assume.js provides a solution to close the gap between "We tested this." and "We just cannot test that." The idea is to weave assumptions - like asserts in unit tests - into the production code. If an assumption is violated the developers in charge will e.g. receive an e-mail so they can do something about it, hopefully even before the user notices the error or gets annoyed.
 
 I did not reinvent the wheel. Assume.js is a clever combination of [Chai](http://chaijs.com)'s "expect" syntax to formulate assumptions and a hook to handle the notification on violated assumptions. With this hook you can go as far as [integrating error management cloud services](#how-do-i-get-notified-like-a-boss).
 
@@ -113,7 +113,31 @@ To get started read chai's docs on the [core concepts](http://chaijs.com/guide/p
 
 ## How do I get notified of violated assumptions?
 
-Description forthcoming.
+Out-of-the-box assume.js just logs a violated assumption to the console. You can easily write your own handler that gets called for each violated assumption like this:
+
+``` js
+var assume = require('assumejs');
+
+assume.overwriteHandleViolation(function (_super) {
+
+  // The function returned will be called once an assumption gets violated.
+  // err - The error that Chai throws.
+  // context - The object that is optionally passed to assume()
+  return function (err, context) {
+
+    // You may or may not call the previously registered handler.
+	// This allows stacking multiple handlers on top of each other if you wish to do so.
+    _super(err, context);
+
+	// Do whatever you would like.
+	// E.g. calling on of the services listed in the next section.
+
+  };
+
+});
+```
+
+The error that Chai throws is caught by assume.js and passed to the handler. It actually is a standardized `AssertionError`. For details see the ['assertion-error' module](https://www.npmjs.org/package/assertion-error)
 
 ## How do I get notified like a boss?
 
@@ -146,7 +170,7 @@ process.on('uncaughtException', function (err) {
 });
 ```
 
-If you use one of the modules for the services [listed above](#how-do-i-get-notified-like-a-boss) please look into their API. Some already provide a mechanism for handling uncaught exceptions that might be preferrable.
+If you use one of the modules for the services [listed above](#how-do-i-get-notified-like-a-boss) please look into their API. Some already provide a mechanism for handling uncaught exceptions that might be preferable.
 
 ## Change History
 
