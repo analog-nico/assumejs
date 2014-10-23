@@ -27,4 +27,18 @@ describe('Assume.js embodying chai.expect', function () {
 
     });
 
+    it('should allow the assertion in the readme', function () {
+
+        var foo = 'bar';
+        var tea = {
+            flavors: ['brownie', 'apple', 'raspberry']
+        };
+
+        expect(function () { assume(foo).to.be.a('string');                          }).to.not.throw();
+        expect(function () { assume(foo).to.equal('bar');                            }).to.not.throw();
+        expect(function () { assume(foo).to.have.length(3);                          }).to.not.throw();
+        expect(function () { assume(tea).to.have.property('flavors').with.length(3); }).to.not.throw();
+
+    });
+
 });
