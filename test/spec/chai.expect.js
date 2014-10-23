@@ -7,7 +7,16 @@ describe('Assume.js embodying chai.expect', function () {
 
     it('should not have altered expect() used in these tests - just to be sure', function () {
 
-        expect(function () { expect(true).to.eql(false); }).to.throw();
+        var expectThrewException = false;
+        try {
+            expect(true).to.eql(false);
+        } catch (e) {
+            expectThrewException = true;
+        }
+
+        if (expectThrewException === false) {
+            throw Error('Expected expect() to throw an exception.');
+        }
 
     });
 
