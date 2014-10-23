@@ -8,6 +8,8 @@
 
 **tl;dr:** Weave assumptions - like asserts in unit tests - into your production code and get notified once they are violated. And no, it is no excuse for lazy testers.
 
+\~\~\~
+
 Frankly, some functionality cannot be sufficiently tested before moving to production: Will we always meet our service level agreements? Our load tests certainly won't cover all real-world scenarios! What if a third party API changes suddenly? We couldn't possibly predict the exact change and write a test for it! This means, we will have production failures and there is nothing we can do to prevent those.
 
 Assume.js provides a solution to close the gap between "We tested this." and "We just cannot test that." The idea is to weave assumptions - like asserts in unit tests - into the production code. If an assumption is violated the developers in charge will e.g. receive an e-mail so they can do something about it, hopefully even before the user notices the error or gets annoyed.
