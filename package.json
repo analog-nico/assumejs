@@ -1,6 +1,6 @@
 {
   "name": "assumejs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Assume your node.js production server won't fail. And get notified if you were wrong.",
   "main": "./lib/assume.js",
   "scripts": {

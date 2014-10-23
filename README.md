@@ -4,19 +4,42 @@
 
 [![Build Status](https://travis-ci.org/analog-nico/assumejs.svg?branch=master)](https://travis-ci.org/analog-nico/assumejs) [![Coverage Status](https://coveralls.io/repos/analog-nico/assumejs/badge.png)](https://coveralls.io/r/analog-nico/assumejs?branch=master) [![Dependency Status](https://david-dm.org/analog-nico/assumejs.svg)](https://david-dm.org/analog-nico/assumejs)
 
-Assume your **node.js** production server won't fail. And get notified if you were wrong.
-
 ## What does it do?
 
-Description forthcoming.
+**tl;dr:** Waeve assumptions - like asserts in unit tests - into your production code and get notified once they are violated. And no, it is no excuse for lazy testers.
+
+Frankly, some functionality cannot be sufficiently tested before moving to production: Will we always meet our service level agreements? Our load tests certainly won't cover all real-world scenarios! What if a third party API changes suddenly? We couldn't possibly predict the exact change and write a test for it! This means, we will have production failures and there is nothing we can do to prevent those.
+
+Assume.js provides a solution to close the gap betweeen "We tested this." and "We just cannot test that." The idea is to weave assumptions - like asserts in unit tests - into the production code. If an assumption is violated the developers in charge will e.g. receive an e-mail so they can do something about it, hopefully even before the user notices the error or gets annoyed.
+
+I did not reinvent the wheel. Assume.js is a clever combination of [Chai](http://chaijs.com)'s "expect" syntax to formulate assumptions and a hook to handle the notification on violated assumptions. With this hook you can go as far as [integrating error management cloud services](#how-do-i-get-notified-like-a-boss).
+
+## Supported Platforms
+
+Available today:
+
+- Node.js (0.10 and 0.11)
+
+In the future:
+
+- Major browsers
+  (With < 100 LOC and all dependencies available for the browser it is probably just a two day job to make it happen. Also, many error management cloud services already provide a browser-compatible library to access their API.)
+- Other server runtimes
+  (Please let me know if you implemented a clone in another language. Chai recommends [Konacha](https://github.com/jfirebaugh/konacha) as an alternative for Ruby on Rails. Most error management cloud services already provide SDKs for major platforms. If you are a Java developer you might also want to look into [Takipi](https://www.takipi.com).)
 
 ## Installation
 
-Description forthcoming.
+[![NPM Stats](https://nodei.co/npm/assumejs.png?downloads=true)](https://npmjs.org/package/assumejs)
+
+The module for node.js is installed via npm:
+
+``` bash
+$ npm install assumejs --save
+```
 
 ## Writing Assumptions
 
-Assume.js is basically a renaming of [chai](http://chaijs.com)'s `expect()`. That means you can apply your working knowledge or [read the docs](http://chaijs.com/api/bdd/) and just use 'assume' instead of 'expect'. E.g.:
+Assume.js is basically a renaming of [Chai](http://chaijs.com)'s `expect()`. That means you can apply your working knowledge or [read the docs](http://chaijs.com/api/bdd/) and just use "assume" instead of "expect". E.g.:
 
 ``` js
 var expect = require('chai').expect;
@@ -62,10 +85,6 @@ expect(foo).to.equal('bar');
 assume(foo, 'my message', { data: 'Hello world!' }).to.equal('bar');
 ```
 
-TODO:
-- Add never chain which is an alias for .not
-- assume().never.happens()
-
 ### Extending the Assumption Syntax
 
 Chai was designed with high extensibility in mind and many [plugins](http://chaijs.com/plugins) are already available.
@@ -77,20 +96,20 @@ Assume.js exposes chai's plugin hook:
 var chai = require('chai');
 
 chai.use(function (_chai, utils) {
-	// Write your plugin code here.
+  // Write your plugin code here.
 });
 
 // This is identical in assume.js:
 var assume = require('assumejs');
 
 assume.chaiUse(function (_chai, utils) {
-	// Write your plugin code here.
+  // Write your plugin code here.
 });
 ```
 
-Read chai's docs on the [core concepts](http://chaijs.com/guide/plugins/) and how to [build a helper](http://chaijs.com/guide/helpers/) to get started.
+To get started read chai's docs on the [core concepts](http://chaijs.com/guide/plugins/) and how to [build a helper](http://chaijs.com/guide/helpers/).
 
-**Caution:** If you install an existing plugin or write your own you have to obey one rule: Any assertion must be executed through `chai.Assertion.assert(...)`. Assume.js overwrites this method in order to not throw an error if an assumption is violated and to invoke the notification handler instead.
+**Caution:** If you install an existing plugin or write your own you have to obey one rule: Any assertion must be executed through `chai.Assertion.assert(...)`. Assume.js overwrites this method in order to not throw an error if an assumption is violated and to invoke the notification handler instead. If the plugin throws its own errors instead of calling the assert method the production code will crash!
 
 ## How do I get notified of violated assumptions?
 
@@ -110,6 +129,29 @@ The first time a certain assumption is violated you want to get notified immedia
 | [Raygun](https://raygun.io)               |                    | npm install [raygun](https://www.npmjs.org/package/raygun)                 | Gists welcome   |
 | [Rollbar](https://rollbar.com)            | offers a free plan | npm install [rollbar](https://www.npmjs.org/package/rollbar)               | Gists welcome   |
 | [Stackify](http://www.stackify.com)       |                    | call their REST api                                                        | Gists welcome   |
+
+## Be responsible!
+
+Assume.js is just one safety net of many you shall apply. Writing assumptions does not let you off the hook implementing proper error handling. I highly recommend Joyent's article about [error handling in node.js](https://www.joyent.com/developers/node/design/errors). Speaking in their terms you can only write assumptions for "operational errors". For those of which you understand well you can and should write code to recover from them. Those of which you don't understand well you should write assumptions that help you get a better understanding through their notifications - but in the meantime it is probably the best to intentionally crash your server as you would do for "programmer errors".
+
+When intentionally crashing your system because of an error you can't handle you probably will want to get notified like for violated assumptions. Therefore add the following code to your main file:
+
+``` js
+var assume = require('assumejs');
+
+process.on('uncaughtException', function (err) {
+  var context = { type: 'uncaughtException' }; // Or whatever you would like to pass with the notification.
+  assume.handleViolation(err, context);        // This is the same hook that assumptions use.
+  throw err;                                   // So that you actually crash your server.
+});
+```
+
+If you use one of the modules for the services [listed above](#how-do-i-get-notified-like-a-boss) please look into their API. Some already provide a mechanism for handling uncaught exceptions that might be preferrable.
+
+## Change History
+
+- v0.1.0 (2014-10-23)
+	- Initial version
 
 ## License (ISC)
 

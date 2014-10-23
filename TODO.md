@@ -1,0 +1,2 @@
+- Add .never chain which is an alias for .not
+- assume().never.happens()
