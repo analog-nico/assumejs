@@ -55,6 +55,7 @@ describe('Assume.js', function () {
         assume.overwriteHandleViolation(function (_super) {
             return function (err, context) {
                 passedContextValue = context;
+                orginalViolationHandler(err, context);
             };
         });
 
