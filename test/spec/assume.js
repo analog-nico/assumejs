@@ -8,11 +8,11 @@ describe('Assume.js', function () {
     var orginalViolationHandler;
 
     before(function () {
-        orginalViolationHandler = assume.handleViolation;
+        orginalViolationHandler = assume.notify;
     });
 
     after(function (){
-        assume.handleViolation = orginalViolationHandler;
+        assume.notify = orginalViolationHandler;
     });
 
     it('should register a custom violation handler', function () {

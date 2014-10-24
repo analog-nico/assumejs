@@ -175,7 +175,7 @@ var assume = require('assumejs');
 
 process.on('uncaughtException', function (err) {
   var context = { type: 'uncaughtException' }; // Or whatever you would like to pass with the notification.
-  assume.handleViolation(err, context);        // This is the same hook that assumptions use.
+  assume.notify(err, context);                 // This is the same hook that assumptions use.
   throw err;                                   // So that you actually crash your server.
 });
 ```
