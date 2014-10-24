@@ -209,6 +209,10 @@ If you want to debug a test you should use `gulp test-without-coverage` to run a
 
 ## Change History
 
+- v0.2.0 (2014-10-24)
+	- **Breaking Changes:**
+		- Renamed `assume.overwriteHandleViolation(...)` into `assume.overwriteNotify(...)`
+		- Renamed `assume.handleViolation(...)` into `assume.notify(...)`
 - v0.1.0 (2014-10-23)
 	- Initial version
 
