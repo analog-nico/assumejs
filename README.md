@@ -29,6 +29,14 @@ In the future:
 - Other server runtimes
   (Please let me know if you implemented a clone in another language. Chai recommends [Konacha](https://github.com/jfirebaugh/konacha) as an alternative for Ruby on Rails. Most error management cloud services already provide SDKs for major platforms. If you are a Java developer you might also want to look into [Takipi](https://www.takipi.com).)
 
+## Performance
+
+Will the assumptions slow down your system? I wrote a [test](test/performance.js) and executed it on my MacBook Air with node.js v0.10.32:
+
+```
+Executing 40000 assumptions took 669 ms. That is 16.725 µs per assumption.
+```
+
 ## Installation
 
 [![NPM Stats](https://nodei.co/npm/assumejs.png?downloads=true)](https://npmjs.org/package/assumejs)
