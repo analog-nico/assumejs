@@ -99,7 +99,7 @@ assume(foo, 'my message', { data: 'Hello world!' }).to.equal('bar');
 
 Chai was designed with high extensibility in mind and many [plugins](http://chaijs.com/plugins) are already available.
 
-Assume.js exposes chai's plugin hook:
+Assume.js exposes Chai's plugin hook:
 
 ``` js
 // Chai users are used to:
@@ -181,6 +181,31 @@ process.on('uncaughtException', function (err) {
 ```
 
 If you use one of the modules for the services [listed above](#how-do-i-get-notified-like-a-boss) please look into their API. Some already provide a mechanism for handling uncaught exceptions that might be preferable.
+
+## Contributing
+
+What would you like to contribute?
+
+- **Extending the assumption syntax**
+  Usually an extension will not only be helpful for assume.js users but also for Chai-based unit tests. Your contribution will be maximized if you write a Chai plugin and [use it with assume.js](#extending-the-assumption-syntax).
+  Please let me know about your Chai plugins and I will compile a recommendation list. If you happen to implement a plugin that most assume.js users would use anyway I might bundle it with assume.js by default.
+- **Adding a new way to notify about violated assumptions**
+  If you implemented a few lines to integrate e.g. a service that is listed above feel free to publish a Gist. I will add a link in this README.
+  However, if you implement some more sophisticated notification code - I would be blown away if someone used [Stackman](https://github.com/watson/stackman) - I suggest you write a node module that uses 'assumejs' as a dependency. Ideally you would name it with a 'assumejs-' prefix. Anyway please let me now and I will put up a link.
+- **Extending assume.js' core**
+  Pull requests are welcome. Just set up your dev environment as described below and your are ready to go.
+
+### Set up Your Development Environment for Assume.js
+
+1. Clone the repo to your desktop,
+2. in the shell `cd` to the main folder,
+3. hit `npm install`,
+4. hit `npm install gulp -g` if you haven't installed gulp globally yet, and
+5. run `gulp dev`. (Or run `node ./node_modules/.bin/gulp dev` if you don't want to install gulp globally.)
+
+`gulp dev` watches all source files and if you save some changes it will lint the code and execute all tests. The test coverage report can be viewed from `./coverage/lcov-report/index.html`.
+
+If you want to debug a test you should use `gulp test-without-coverage` to run all tests without obscuring the code by the test coverage instrumentation.
 
 ## Change History
 
