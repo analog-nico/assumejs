@@ -128,7 +128,7 @@ Out-of-the-box assume.js just logs a violated assumption to the console. You can
 ``` js
 var assume = require('assumejs');
 
-assume.overwriteHandleViolation(function (_super) {
+assume.overwriteNotify(function (_super) {
 
   // The function returned will be called once an assumption gets violated.
   // err - The error that Chai throws

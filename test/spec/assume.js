@@ -19,7 +19,7 @@ describe('Assume.js', function () {
 
         var timesCalled = 0;
 
-        assume.overwriteHandleViolation(function (_super) {
+        assume.overwriteNotify(function (_super) {
             return function (err, context) {
                 timesCalled += 1;
             };
@@ -36,7 +36,7 @@ describe('Assume.js', function () {
 
         var passedError;
 
-        assume.overwriteHandleViolation(function (_super) {
+        assume.overwriteNotify(function (_super) {
             return function (err, context) {
                 passedError = err;
             };
@@ -52,7 +52,7 @@ describe('Assume.js', function () {
 
         var passedContextValue;
 
-        assume.overwriteHandleViolation(function (_super) {
+        assume.overwriteNotify(function (_super) {
             return function (err, context) {
                 passedContextValue = context;
                 orginalViolationHandler(err, context);
@@ -70,7 +70,7 @@ describe('Assume.js', function () {
 
         var passedContextValue;
 
-        assume.overwriteHandleViolation(function (_super) {
+        assume.overwriteNotify(function (_super) {
             return function (err, context) {
                 passedContextValue = context;
             };
@@ -86,7 +86,7 @@ describe('Assume.js', function () {
 
         var passedContextValue, passedError;
 
-        assume.overwriteHandleViolation(function (_super) {
+        assume.overwriteNotify(function (_super) {
             return function (err, context) {
                 passedContextValue = context;
                 passedError = err;
