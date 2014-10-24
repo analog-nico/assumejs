@@ -164,6 +164,34 @@ The first time a certain assumption is violated you want to get notified immedia
 | [Rollbar](https://rollbar.com)            | offers a free plan | npm install [rollbar](https://www.npmjs.org/package/rollbar)               | [Gist](https://gist.github.com/analog-nico/cfec6ebf59f9cdce33a6) |
 | [Stackify](http://www.stackify.com)       |                    | call their REST api                                                        | Gists welcome   |
 
+## The Second Use Case
+
+Assume you want to store your data in your MongoDB:
+
+``` js
+collection.update(
+  { id: 42 },
+  { soda: 'and what not' },
+  { upsert: true },
+  function (err, doc) {
+    if (err) {
+      // ???
+    }
+  });
+```
+
+Now assume you properly tested your code and it is working. The only reasons I can think of that an error occurs is (1) your code contains a bug - which is kinda unlikely because you wrote enough tests - and (2) MongoDB is down - which is also unlikely because you chose a reliable hoster. This means it would make no sense to write extensive error recovery code at this point. It is more effective to get notified if an error actually occurs and then decide if it is worth the effort to implement some intelligent error handling.
+
+Of course one assume.js call will make your day:
+
+``` js
+function (err, doc) {
+  if (err) {
+    assume.notify(err); // This is the same hook that assumptions use.
+  }
+}
+```
+
 ## Be responsible!
 
 Assume.js is just one safety net of many you shall apply. Writing assumptions does not let you off the hook implementing proper error handling. I highly recommend Joyent's article about [error handling in node.js](https://www.joyent.com/developers/node/design/errors). Speaking in their terms it is best to focus on writing assumptions for "operational errors". For those of which you understand well you can and should write code to recover from them. Those of which you don't understand well you should write assumptions that help you get a better understanding through their notifications - but in the meantime it is probably a good choice to intentionally crash your server as you would do for "programmer errors".
