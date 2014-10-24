@@ -148,12 +148,12 @@ The first time a certain assumption is violated you want to get notified immedia
 | Service                                   | No money?          | Integration                                                                | Getting Started |
 |-------------------------------------------|--------------------|----------------------------------------------------------------------------|-----------------|
 | [Airbrake](https://airbrake.io)           |                    | npm install [airbrake](https://www.npmjs.org/package/airbrake)             | Gists welcome   |
-| [App Enlight](https://appenlight.com)     | offers a free plan | service endpoint is [Airbrake-compatible](https://appenlight.com/page/airbrake/compatible-exception-logging) | Gists welcome   |
+| [App Enlight](https://appenlight.com)     | offers a free plan | service endpoint is [Airbrake-compatible](https://appenlight.com/page/airbrake/compatible-exception-logging) | [Gist](https://gist.github.com/analog-nico/cbd45205011e810be855) |
 | [Bugsnag](https://bugsnag.com)            |                    | npm install [bugsnag](https://www.npmjs.org/package/bugsnag)               | Gists welcome   |
 | [Errbit](http://errbit.github.io/errbit/) | host yourself      | service endpoint is [Airbrake-compatible](http://errbit.github.io/errbit/) | Gists welcome   |
 | [Honeybadger](https://www.honeybadger.io) |                    | npm install [honeybadger](https://www.npmjs.org/package/honeybadger)       | Gists welcome   |
 | [Raygun](https://raygun.io)               |                    | npm install [raygun](https://www.npmjs.org/package/raygun)                 | Gists welcome   |
-| [Rollbar](https://rollbar.com)            | offers a free plan | npm install [rollbar](https://www.npmjs.org/package/rollbar)               | Gists welcome   |
+| [Rollbar](https://rollbar.com)            | offers a free plan | npm install [rollbar](https://www.npmjs.org/package/rollbar)               | [Gist](https://gist.github.com/analog-nico/cfec6ebf59f9cdce33a6) |
 | [Stackify](http://www.stackify.com)       |                    | call their REST api                                                        | Gists welcome   |
 
 ## Be responsible!
