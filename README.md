@@ -158,7 +158,7 @@ The first time a certain assumption is violated you want to get notified immedia
 
 ## Be responsible!
 
-Assume.js is just one safety net of many you shall apply. Writing assumptions does not let you off the hook implementing proper error handling. I highly recommend Joyent's article about [error handling in node.js](https://www.joyent.com/developers/node/design/errors). Speaking in their terms you can only write assumptions for "operational errors". For those of which you understand well you can and should write code to recover from them. Those of which you don't understand well you should write assumptions that help you get a better understanding through their notifications - but in the meantime it is probably the best to intentionally crash your server as you would do for "programmer errors".
+Assume.js is just one safety net of many you shall apply. Writing assumptions does not let you off the hook implementing proper error handling. I highly recommend Joyent's article about [error handling in node.js](https://www.joyent.com/developers/node/design/errors). Speaking in their terms it is best to focus on writing assumptions for "operational errors". For those of which you understand well you can and should write code to recover from them. Those of which you don't understand well you should write assumptions that help you get a better understanding through their notifications - but in the meantime it is probably a good choice to intentionally crash your server as you would do for "programmer errors".
 
 When intentionally crashing your system because of an error you can't handle, you probably will want to get notified like for violated assumptions. Therefore add the following code to your main file:
 
