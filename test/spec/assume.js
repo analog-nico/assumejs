@@ -32,6 +32,29 @@ describe('Assume.js', function () {
 
     });
 
+    it('should allow stacking multiple violation handlers', function () {
+
+        var timesCalled = 0;
+
+        assume.overwriteNotify(function (_super) {
+            return function (err, context) {
+                timesCalled += 1;
+            };
+        });
+
+        assume.overwriteNotify(function (_super) {
+            return function (err, context) {
+                timesCalled += 1;
+                _super(err, context);
+            };
+        });
+
+        assume(true).to.eql(false);
+
+        expect(timesCalled).to.eql(2);
+
+    });
+
     it('should forward the message', function () {
 
         var passedError;
