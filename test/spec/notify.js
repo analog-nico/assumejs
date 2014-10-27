@@ -15,7 +15,7 @@ describe('assume.notify()', function () {
         assume.notify = orginalViolationHandler;
     });
 
-    it('should allow overwriting', function () {
+    it('can be overwritten', function () {
 
         var timesCalled = 0;
 
@@ -32,7 +32,7 @@ describe('assume.notify()', function () {
 
     });
 
-    it('should allow overwriting with multiple handlers', function () {
+    it('can be overwritten with multiple handlers', function () {
 
         var timesCalled = 0;
 
@@ -52,6 +52,27 @@ describe('assume.notify()', function () {
         assume(true).to.eql(false);
 
         expect(timesCalled).to.eql(2);
+
+    });
+
+    it('can be invoked directly', function () {
+
+        var receivedErr, receivedContext;
+
+        assume.overwriteNotify(function (_super) {
+            return function (err, context) {
+                receivedErr = err;
+                receivedContext = context;
+            };
+        });
+
+        var err = new Error('test');
+        var context = { some: 'context'};
+
+        assume.notify(err, context);
+
+        expect(err).to.eql(receivedErr);
+        expect(context).to.eql(receivedContext);
 
     });
 
