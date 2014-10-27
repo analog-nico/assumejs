@@ -17,7 +17,7 @@ assume.overwriteNotify(function (_super) {
         var stack = err.stack;
         Error.prepareStackTrace = prepare_orig;
 
-        console.log('Callsites report filename: ' + path.relative('.', stack[1].receiver.filename));
+        console.error('Callsites report filename: ' + path.relative('.', stack[1].receiver.filename));
 
     };
 
