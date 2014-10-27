@@ -5,6 +5,16 @@ var assume = require('../../lib/assume.js');
 
 describe('Assume.js embodying chai.expect', function () {
 
+    var orginalViolationHandler;
+
+    before(function () {
+        orginalViolationHandler = assume.notify;
+    });
+
+    after(function (){
+        assume.notify = orginalViolationHandler;
+    });
+
     it('should not have altered expect() used in these tests - just to be sure', function () {
 
         var expectThrewException = false;
@@ -21,6 +31,10 @@ describe('Assume.js embodying chai.expect', function () {
     });
 
     it('should allow basic assertions', function () {
+
+        assume.overwriteNotify(function (_super) {
+            return function (err, context) { };
+        });
 
         expect(function () { assume(true).to.eql(true);  }).to.not.throw();
         expect(function () { assume(true).to.eql(false); }).to.not.throw();

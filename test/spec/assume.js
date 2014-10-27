@@ -15,47 +15,7 @@ describe('Assume.js', function () {
         assume.notify = orginalViolationHandler;
     });
 
-    it('should register a custom violation handler', function () {
-
-        var timesCalled = 0;
-
-        assume.overwriteNotify(function (_super) {
-            return function (err, context) {
-                timesCalled += 1;
-            };
-        });
-
-        assume(true).to.eql(true);
-        assume(true).to.eql(false);
-
-        expect(timesCalled).to.eql(1);
-
-    });
-
-    it('should allow stacking multiple violation handlers', function () {
-
-        var timesCalled = 0;
-
-        assume.overwriteNotify(function (_super) {
-            return function (err, context) {
-                timesCalled += 1;
-            };
-        });
-
-        assume.overwriteNotify(function (_super) {
-            return function (err, context) {
-                timesCalled += 1;
-                _super(err, context);
-            };
-        });
-
-        assume(true).to.eql(false);
-
-        expect(timesCalled).to.eql(2);
-
-    });
-
-    it('should forward the message', function () {
+    it('should forward the message value', function () {
 
         var passedError;
 
@@ -71,14 +31,14 @@ describe('Assume.js', function () {
 
     });
 
-    it('should pass the context value', function () {
+    it('should forward the context value', function () {
 
         var passedContextValue;
 
         assume.overwriteNotify(function (_super) {
             return function (err, context) {
                 passedContextValue = context;
-                orginalViolationHandler(err, context);
+                _super(err, context);
             };
         });
 
@@ -89,7 +49,7 @@ describe('Assume.js', function () {
 
     });
 
-    it('should set the context value to undefined if not provided', function () {
+    it('should forward undefined if no context value is provided', function () {
 
         var passedContextValue;
 
