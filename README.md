@@ -237,6 +237,8 @@ If you want to debug a test you should use `gulp test-without-coverage` to run a
 
 ## Change History
 
+- v0.2.1 (2014-10-27)
+    - The default implementation of `assume.notify(...)` does not alter the error anymore.
 - v0.2.0 (2014-10-24)
 	- **Breaking Changes:**
 		- Renamed `assume.overwriteHandleViolation(...)` into `assume.overwriteNotify(...)`
