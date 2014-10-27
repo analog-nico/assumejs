@@ -5,14 +5,14 @@ var assume = require('../../lib/assume.js');
 
 describe('assume.notify()', function () {
 
-    var orginalViolationHandler;
+    var originalViolationHandler;
 
     before(function () {
-        orginalViolationHandler = assume.notify;
+        originalViolationHandler = assume.notify;
     });
 
     after(function (){
-        assume.notify = orginalViolationHandler;
+        assume.notify = originalViolationHandler;
     });
 
     it('can be overwritten', function () {

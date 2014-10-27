@@ -5,14 +5,14 @@ var assume = require('../../lib/assume.js');
 
 describe('Assume.js embodying chai.expect', function () {
 
-    var orginalViolationHandler;
+    var originalViolationHandler;
 
     before(function () {
-        orginalViolationHandler = assume.notify;
+        originalViolationHandler = assume.notify;
     });
 
     after(function (){
-        assume.notify = orginalViolationHandler;
+        assume.notify = originalViolationHandler;
     });
 
     it('should not have altered expect() used in these tests - just to be sure', function () {
