@@ -90,9 +90,7 @@ describe('assume.notify()', function () {
 
         });
 
-        // Tests deactivated since the Stack Trace API seems to be broken in node 0.11
-        // See: https://github.com/joyent/node/issues/8627
-        xit('should properly format the error if the callsites where retrieved beforehand', function (done) {
+        it('should properly format the error if the callsites where retrieved beforehand', function (done) {
 
             childProcess.exec('node ' + path.join(__dirname, '../fixtures/notify/callsitesThenConsole.js'), function (err, stdout, stderr) {
                 expect(stderr).to.contain('Callsites report filename: test/fixtures/notify/callsitesThenConsole.js\n' +
@@ -102,7 +100,7 @@ describe('assume.notify()', function () {
 
         });
 
-        xit('should allow retrieving the callsites afterwards', function (done) {
+        it('should allow retrieving the callsites afterwards', function (done) {
 
             childProcess.exec('node ' + path.join(__dirname, '../fixtures/notify/consoleThenCallsites.js'), function (err, stdout, stderr) {
                 expect(stderr).to.contain('[assume.js] AssertionError: expected true to deeply equal false\nActual:   true\nExpected: false\nContext:  { some: \'context\' }\n\n' +
