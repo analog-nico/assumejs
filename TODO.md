@@ -1,1 +1,3 @@
 - Add .never chain which is an alias for .not
+- Report test coverage for tests that are executed in another process
+- Is it possible to retrieve the stack of an error and afterwards retrieve it again using a different prepareStackTrace function?
