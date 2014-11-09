@@ -62,7 +62,8 @@ gulp.task('test', ['clean'], function (done) {
 
             gulp.src(paths.specFiles)
                 .pipe(mocha())
-                .on('error', function () {
+                .on('error', function (err) {
+                    console.error(String(err));
                     console.log(chalk.bold.bgRed(' TESTS FAILED '));
                     done();
                 })
