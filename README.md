@@ -162,6 +162,7 @@ The first time a certain assumption is violated you want to get notified immedia
 | [Honeybadger](https://www.honeybadger.io) |                    | npm install [honeybadger](https://www.npmjs.org/package/honeybadger)       | Gists welcome   |
 | [Raygun](https://raygun.io)               |                    | npm install [raygun](https://www.npmjs.org/package/raygun)                 | Gists welcome   |
 | [Rollbar](https://rollbar.com)            | offers a free plan | npm install [rollbar](https://www.npmjs.org/package/rollbar)               | [Gist](https://gist.github.com/analog-nico/cfec6ebf59f9cdce33a6) |
+| [Sentry](https://www.getsentry.com)       |                    | npm install [raven](https://www.npmjs.org/package/raven)                   | Gists welcome   |
 | [Stackify](http://www.stackify.com)       |                    | call their REST api                                                        | Gists welcome   |
 
 ## The Second Use Case
