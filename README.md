@@ -117,7 +117,7 @@ assume.chaiUse(function (_chai, utils) {
 });
 ```
 
-To get started read chai's docs on the [core concepts](http://chaijs.com/guide/plugins/) and how to [build a helper](http://chaijs.com/guide/helpers/).
+To get started read Chai's docs on the [core concepts](http://chaijs.com/guide/plugins/) and how to [build a helper](http://chaijs.com/guide/helpers/).
 
 **Caution:** If you install an existing plugin or write your own you have to obey one rule: Any assertion must be executed through `chai.Assertion.assert(...)`. Assume.js overwrites this method in order to not throw an error if an assumption is violated and to invoke the notification handler instead. If the plugin throws its own errors instead of calling the assert method the production code will crash!
 
@@ -238,6 +238,9 @@ If you want to debug a test you should use `gulp test-without-coverage` to run a
 
 ## Change History
 
+- v0.2.2 (2015-01-29)
+    - Fixed crash of `assume.notify(...)` when passing a non-Error parameter
+    - Updated Chai to version 1.10.0 which allows terminating assertion properties to also be executed as functions. E.g. `expect(true).to.be.true;` can also be written as `expect(true).to.be.true();`.
 - v0.2.1 (2014-10-27)
     - The default implementation of `assume.notify(...)` does not alter the error anymore.
 - v0.2.0 (2014-10-24)
