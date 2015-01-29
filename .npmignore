@@ -1,0 +1,11 @@
+.idea
+coverage
+gists
+node_modules
+test
+.editorconfig
+.gitignore
+.jshintrc
+.travis.yml
+gulpfile.js
+TODO.md
