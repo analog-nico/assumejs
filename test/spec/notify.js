@@ -9,11 +9,11 @@ describe('assume.notify()', function () {
 
     var originalViolationHandler;
 
-    before(function () {
+    beforeEach(function () {
         originalViolationHandler = assume.notify;
     });
 
-    after(function (){
+    afterEach(function (){
         assume.notify = originalViolationHandler;
     });
 
@@ -88,6 +88,10 @@ describe('assume.notify()', function () {
                 done();
             });
 
+        });
+
+        it('should not crash for non-Error objects', function () {
+            expect(function () { assume.notify(null); }).to.not.throw();
         });
 
         it('should properly format the error if the callsites where retrieved beforehand', function (done) {
