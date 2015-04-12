@@ -238,7 +238,7 @@ If you want to debug a test you should use `gulp test-without-coverage` to run a
 
 ## Change History
 
-- v0.2.3 (forthcoming)
+- v0.2.3 (2015-04-12)
     - Added io.js to Travis CI build
     - Updated dependencies
 - v0.2.2 (2015-01-29)
