@@ -58,6 +58,7 @@ gulp.task('test', ['clean'], function (done) {
         .pipe(istanbul({
             coverageVariable: coverageVariable
         }))
+        .pipe(istanbul.hookRequire())
         .on('finish', function () {
 
             gulp.src(paths.specFiles)
@@ -65,7 +66,7 @@ gulp.task('test', ['clean'], function (done) {
                 .on('error', function (err) {
                     console.error(String(err));
                     console.log(chalk.bold.bgRed(' TESTS FAILED '));
-                    done();
+                    done(new Error(' TESTS FAILED '));
                 })
                 .pipe(istanbul.writeReports({
                     reporters: ['lcov'],

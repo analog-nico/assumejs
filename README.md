@@ -238,6 +238,9 @@ If you want to debug a test you should use `gulp test-without-coverage` to run a
 
 ## Change History
 
+- v0.2.3 (forthcoming)
+    - Added io.js to Travis CI build
+    - Updated dependencies
 - v0.2.2 (2015-01-29)
     - Fixed crash of `assume.notify(...)` when passing a non-Error parameter
     - Updated Chai to version 1.10.0 which allows terminating assertion properties to also be executed as functions. E.g. `expect(true).to.be.true;` can also be written as `expect(true).to.be.true();`.
